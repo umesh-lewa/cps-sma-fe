@@ -37,7 +37,7 @@ function App() {
           <AuthRoute exact path="/profile" component={Profile} />
           <AuthRoute exact path="/editProfile" component={EditProfile} />
           <Route exact path="/forgotPassword" component={ForgotPassword} />
-          <Route exact path="/resetPassword" component={ResetPassword} />
+          <Route path="/reset/:userid/:reset_token" component={ResetPassword}/>
           
         </Container>
       </Router>
