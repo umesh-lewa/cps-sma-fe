@@ -16,6 +16,9 @@ function Home(props) {
   const [loading, setLoading] = useState(true);
   const [isPostAlreadyLiked, setIsPostAlreadyLiked] = useState(false);
 
+  const [isUserPosts, setIsUSerPosts] = useState(false);
+  const [isFollowingPosts, setIsFollowingPosts] = useState(false);
+  const [isPosts, setIsPosts] = useState(false);
   //var loading = null;
 
   useEffect(() => {
@@ -31,6 +34,25 @@ function Home(props) {
       setLoading(false);
       setUserPosts(response.userPosts);
       setFollowingPosts(response.followingPosts);
+
+      console.log("response : "+JSON.stringify(response));
+      console.log("response.userPosts.length : "+response.userPosts.length);
+      console.log("fresponse.followingPosts.length : "+response.followingPosts.length);
+
+      if (response.userPosts.length == 0 && response.followingPosts.length == 0) {
+        console.log("no posts are there");
+        setIsPosts(false);
+        if(response.userPosts.length == 0){
+          setIsUSerPosts(false);
+        }
+        if(response.followingPosts.length == 0){
+          setIsFollowingPosts(false);
+        }
+      } else {
+        console.log("some posts are there");
+        setIsPosts(true);
+      }
+  
     }
 
   }
@@ -66,24 +88,33 @@ function Home(props) {
         </>
 
       ) : (
-          <Grid columns={3}>
-            <Grid.Row>
-              <Transition.Group>
-                {userPosts &&
-                  userPosts.map((post) => (
-                    <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
-                      <PostCard post={post} getAllPosts={getAllPosts} />
-                    </Grid.Column>
-                  ))}
-                {followingPosts &&
-                  followingPosts.map((post) => (
-                    <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
-                  <PostCard post={post} getAllPosts={getAllPosts}/>
-                </Grid.Column>
-                  ))}
-              </Transition.Group>
-            </Grid.Row>
-          </Grid>
+
+          <>
+            {isPosts ? (
+              <Grid columns={3}>
+                <Grid.Row>
+                  <Transition.Group>
+                    {userPosts &&
+                      userPosts.map((post) => (
+                        <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
+                          <PostCard post={post} getAllPosts={getAllPosts} />
+                        </Grid.Column>
+                      ))}
+
+                    {followingPosts &&
+                      followingPosts.map((post) => (
+                        <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
+                          <PostCard post={post} getAllPosts={getAllPosts} />
+                        </Grid.Column>
+                      ))}
+                  </Transition.Group>
+                </Grid.Row>
+              </Grid>
+            ) : (
+              <h2>No Posts Yet ! Follow new people or start sharing !</h2>
+          )}
+          </>
+
         )}
 
     </>
