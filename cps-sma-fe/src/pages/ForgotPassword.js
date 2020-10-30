@@ -11,20 +11,20 @@ function ForgotPassword(props) {
     const verifyForgotUser = async () => {
 
         const userData = {
-            email
+            "useremail": email
         }
 
         setEmail("");
 
-        let response = await fetch("https://cps-sma-umesh.herokuapp.com/users/login", {
+        let response = await fetch("https://cps-sma-umesh.herokuapp.com/users/forgotPassword", {
             method: "POST",
             body: JSON.stringify(userData),
             headers: {
                 "Content-Type" : "application/json"
             }
-        })
+        });
 
-        response = await response.json()
+        response = await response.json();
         if(response.stat === "200"){
 
         }
@@ -36,8 +36,6 @@ function ForgotPassword(props) {
         e.preventDefault()
         verifyForgotUser()
     }
-
-    var loading = null;
 
     return (
         <div className="form-container">
