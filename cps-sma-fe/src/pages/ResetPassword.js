@@ -15,6 +15,7 @@ function ResetPassword(props) {
     const history = useHistory();
 
     useEffect(() => {
+
         fetch("https://cps-sma-umesh.herokuapp.com/users/reset/" + userid + "/" + reset_token)
             .then(async (res) => {
                 let data = await res.json();
@@ -60,7 +61,7 @@ function ResetPassword(props) {
         }
 
         let response = await fetch("https://cps-sma-umesh.herokuapp.com/users/reset/", {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify(userData),
             headers: {
                 "Content-Type": "application/json"

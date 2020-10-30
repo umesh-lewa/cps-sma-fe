@@ -109,8 +109,8 @@ function EditProfile(props) {
             setEditMessage("Successfuly Updated Details");
         } else {
             setEditMessage(response.message);
+            setLoading(false);
         }
-
 
     }
 
