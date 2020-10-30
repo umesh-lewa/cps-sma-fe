@@ -4,7 +4,6 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
-
 import MenuBar from './components/MenuBar';
 import About from './pages/About';
 import Home from './pages/Home';

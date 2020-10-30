@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import {useHistory} from "react-router-dom";
 
@@ -36,6 +36,8 @@ function ForgotPassword(props) {
         e.preventDefault()
         verifyForgotUser()
     }
+
+    let loading = null;
 
     return (
         <div className="form-container">
