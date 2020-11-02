@@ -1,6 +1,6 @@
 # cps-sma-fe
 
-Test Credentials :
+# Test Credentials :
 
-email: umesh.lewa@yahoo.com
-password: 123456
+# email: umesh.lewa@yahoo.com
+# password: 123456
