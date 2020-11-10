@@ -54,7 +54,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
             method: "DELETE",
             body: JSON.stringify({
                 "postId": _id,
-                "useremail": user.useremail
+                "useremail": localStorage.getItem("currentUserEmail")
             }),
             headers: {
                 "Content-Type": "application/json"

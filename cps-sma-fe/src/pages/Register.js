@@ -41,18 +41,22 @@ function Register(props) {
         })
 
         if (!userData.username) {
+            setLoading(false);
             return setRegisterMessage('Username is required');
         }
 
         if (!userData.email) {
+            setLoading(false);
             return setRegisterMessage('Email is required');
         }
 
         if (!userData.password) {
+            setLoading(false);
             return setRegisterMessage('Password is required');
         }
 
         if (userData.password != confirmPassword) {
+            setLoading(false);
             return setRegisterMessage('Passwords do not match');
         }
 
