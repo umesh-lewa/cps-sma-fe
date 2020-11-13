@@ -7,8 +7,14 @@ function PostForm(props) {
 
     const [body, setBody] = useState("");
     const [user, setUser] = useState("");
+    const [postMesage, setPostMesage] = useState("");
 
     const createPost = async () => {
+
+        if(!body){
+            //setLoading(false);
+            return setPostMesage('Post is Empty !');
+        }
 
         setBody("");
 
@@ -51,6 +57,7 @@ function PostForm(props) {
                         Add Post
                     </Button>
                 </Form.Field>
+                {postMesage ? <h3>{postMesage}</h3> : null}
             </Form>
         </>
     );
