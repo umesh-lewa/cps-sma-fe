@@ -12,6 +12,7 @@ function Home(props) {
 
   const [userPosts, setUserPosts] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [isPostAlreadyLiked, setIsPostAlreadyLiked] = useState(false);
@@ -34,25 +35,29 @@ function Home(props) {
       setLoading(false);
       setUserPosts(response.userPosts);
       setFollowingPosts(response.followingPosts);
+      setAllPosts(response.allPosts);
 
-      console.log("response : "+JSON.stringify(response));
-      console.log("response.userPosts.length : "+response.userPosts.length);
-      console.log("fresponse.followingPosts.length : "+response.followingPosts.length);
+      console.log("allPosts : " + JSON.stringify(allPosts));
 
-      if (response.userPosts.length == 0 && response.followingPosts.length == 0) {
+      //console.log("response : " + JSON.stringify(response));
+      //console.log("response.userPosts.length : " + response.userPosts.length);
+      //console.log("fresponse.followingPosts.length : " + response.followingPosts.length);
+      // || (response.allPosts.length == 0)
+      //if ((response.userPosts.length == 0 && response.followingPosts.length == 0)) {
+      if (response.allPosts.length == 0) {
         console.log("no posts are there");
         setIsPosts(false);
-        if(response.userPosts.length == 0){
+        if (response.userPosts.length == 0) {
           setIsUSerPosts(false);
         }
-        if(response.followingPosts.length == 0){
+        if (response.followingPosts.length == 0) {
           setIsFollowingPosts(false);
         }
       } else {
         console.log("some posts are there");
         setIsPosts(true);
       }
-  
+
     }
 
   }
@@ -94,6 +99,15 @@ function Home(props) {
               <Grid columns={3}>
                 <Grid.Row>
                   <Transition.Group>
+
+                    {allPosts &&
+                      allPosts.map((post) => (
+                        <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
+                          <PostCard post={post} getAllPosts={getAllPosts} />
+                        </Grid.Column>
+                      ))}
+
+                    {/*
                     {userPosts &&
                       userPosts.map((post) => (
                         <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
@@ -107,12 +121,13 @@ function Home(props) {
                           <PostCard post={post} getAllPosts={getAllPosts} />
                         </Grid.Column>
                       ))}
+                        */}
                   </Transition.Group>
                 </Grid.Row>
               </Grid>
             ) : (
-              <h2>No Posts Yet ! Follow new people or start sharing !</h2>
-          )}
+                <h2>No Posts Yet ! Follow new people or start sharing !</h2>
+              )}
           </>
 
         )}

@@ -48,7 +48,7 @@ function PostCard({ post: { body, createdAt, _id, username, likes, comments, lik
                 />
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta as={Link} to={`/posts/${_id}`}>
-                    {moment(createdAt).fromNow(true)}
+                    {moment(createdAt).fromNow(true)} ago
                 </Card.Meta>
                 <Card.Description>{body}</Card.Description>
             </Card.Content>
