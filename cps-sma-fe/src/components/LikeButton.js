@@ -7,6 +7,7 @@ import MyPopup from '../util/MyPopup';
 function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
 
     const [liked, setLiked] = useState(false);
+    const [currentLikeCount, setCurrentLikeCount] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -17,6 +18,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
             console.group("user has already liked");
             setLiked(true);
         }
+        setCurrentLikeCount(likes.length);
     }, []);
 
     const likePost = async () => {
@@ -41,6 +43,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
         if (response.stat === "200") {
             setLiked(true);
             setIsLoading(false);
+            setCurrentLikeCount(1 + parseInt(currentLikeCount));
         }
 
     }
@@ -65,6 +68,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
         if (response.stat === "200") {
             setLiked(false);
             setIsLoading(false);
+            setCurrentLikeCount(parseInt(currentLikeCount) - 1);
         }
 
     }
@@ -99,7 +103,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
                     <Label
                         basic
                         color="teal" >
-                        {likeCount}
+                        {currentLikeCount}
                     </Label>
                 </Button>
             ) : (
@@ -114,7 +118,7 @@ function LikeButton({ user, post: { _id, likeCount, likes }, isAlreadyLiked }) {
                         <Label
                             basic
                             color="teal" >
-                            {likes.length}
+                            {currentLikeCount}
                         </Label>
                     </Button>)}
         </>
