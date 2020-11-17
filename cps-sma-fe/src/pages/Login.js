@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Form, Segment, Divider } from 'semantic-ui-react';
+import { Grid, Button, Form, Segment, Divider } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
 
 import { AuthContext } from '../context/auth';
@@ -45,7 +45,7 @@ function Login(props) {
             context.login(userForContext);
             history.push("/home");
             return;
-        }else{
+        } else {
             setLoading(false);
         }
 
@@ -64,54 +64,84 @@ function Login(props) {
 
     //var loading = null;
 
+    const credentialsStyle = {
+        
+    };
+
     return (
-        <div className="form-container">
-            <Form onSubmit={handleSubmit} noValidate className={loading ? 'loading' : ''}>
-                <h1>Login</h1>
-                <Form.Input
-                    icon='user'
-                    iconPosition='left'
-                    label="Email"
-                    placeholder="Email.."
-                    name="email"
-                    type="text"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <Form.Input
-                    icon='lock'
-                    iconPosition='left'
-                    label="Password"
-                    placeholder="Password.."
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
 
-                {loginMessage ? <h3>{loginMessage}</h3> : null}
-                
-                <Segment basic textAlign='center'>
-                    <Button type="submit" primary>
-                        Login
-                    </Button>
+        <Grid columns={3}>
+            <Grid.Row>
 
-                    <Divider horizontal>Or</Divider>
+                <Grid.Column>
 
-                    <Button
-                        type="text"
-                        primary
-                        onClick={handleForgotPassword}>
-                        Forgot Password ?
-                    </Button>
-                </Segment>
+                </Grid.Column>
 
-            </Form>
+                <Grid.Column>
+                    <div className="form-container">
+                        <Form onSubmit={handleSubmit} noValidate className={loading ? 'loading' : ''}>
+                            <h1>Login</h1>
+                            <Form.Input
+                                icon='user'
+                                iconPosition='left'
+                                label="Email"
+                                placeholder="Email.."
+                                name="email"
+                                type="text"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                            />
+                            <Form.Input
+                                icon='lock'
+                                iconPosition='left'
+                                label="Password"
+                                placeholder="Password.."
+                                name="password"
+                                type="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
 
-            
-        </div>
+                            {loginMessage ? <h3>{loginMessage}</h3> : null}
+
+                            <Segment basic textAlign='center'>
+                                <Button type="submit" primary>
+                                    Login
+                                </Button>
+
+                                <Divider horizontal>Or</Divider>
+
+                                <Button
+                                    type="text"
+                                    primary
+                                    onClick={handleForgotPassword}>
+                                    Forgot Password ?
+                                </Button>
+                            </Segment>
+
+                        </Form>
+
+                        <br></br>
+                        <br></br>
+
+                        <div className="credentials" style={{textAlign:'center'}}>
+                            <h4>Test Credentials</h4>
+                            <h4>Email: umesh.lewa@yahoo.com</h4>
+                            <h4>Password: 123456</h4>
+                        </div>
+
+                    </div>
+                </Grid.Column>
+
+                <Grid.Column>
+
+                </Grid.Column>
+
+            </Grid.Row>
+
+        </Grid>
+
     );
 }
-
 
 export default Login;
